@@ -16,9 +16,9 @@ import {
 } from "http";
 import { URL } from "url";
 
-import { InvocationResponse, NativeClient } from "../Common";
-import * as Errors from "../Errors";
-import * as XRayError from "../Errors/XRayError";
+import { InvocationResponse, NativeClient } from "../Common/index.js";
+import * as Errors from "../Errors/index.js";
+import * as XRayError from "../Errors/XRayError.js";
 
 const ERROR_TYPE_HEADER = "Lambda-Runtime-Function-Error-Type";
 

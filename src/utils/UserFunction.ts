@@ -10,13 +10,13 @@
 
 import path from "path";
 import fs from "fs";
-import { HandlerFunction } from "../Common";
+import { HandlerFunction } from "../Common/index.js";
 import {
   HandlerNotFound,
   MalformedHandlerName,
   ImportModuleError,
   UserCodeSyntaxError,
-} from "../Errors";
+} from "../Errors/index.js";
 
 const FUNCTION_EXPR = /^([^.]*)\.(.*)$/;
 const RELATIVE_PATH_SUBSTRING = "..";
@@ -64,7 +64,9 @@ function _resolveHandler(object: any, nestedProperty: string): any {
  * @return bool
  */
 function _canLoadAsFile(modulePath: string): boolean {
-  return fs.existsSync(modulePath) || fs.existsSync(modulePath + ".js");
+  return (
+    fs.existsSync(modulePath + ".mjs") || fs.existsSync(modulePath + ".js")
+  );
 }
 
 /**
@@ -72,6 +74,7 @@ function _canLoadAsFile(modulePath: string): boolean {
  * Attempts to directly resolve the module relative to the application root,
  * then falls back to the more general require().
  */
+/*
 function _tryRequire(appRoot: string, moduleRoot: string, module: string): any {
   const lambdaStylePath = path.resolve(appRoot, moduleRoot, module);
   if (_canLoadAsFile(lambdaStylePath)) {
@@ -85,6 +88,7 @@ function _tryRequire(appRoot: string, moduleRoot: string, module: string): any {
     return require(nodeStylePath);
   }
 }
+*/
 
 /**
  * Load the user's application or throw a descriptive error.
@@ -98,7 +102,7 @@ function _loadUserApp(
   module: string
 ): any {
   try {
-    return _tryRequire(appRoot, moduleRoot, module);
+    return _loadModule(appRoot, moduleRoot, module);
   } catch (e: any) {
     if (e instanceof SyntaxError) {
       throw new UserCodeSyntaxError(<any>e);
@@ -107,6 +111,35 @@ function _loadUserApp(
     } else {
       throw e;
     }
+  }
+}
+
+async function _tryModule(modPath:string) {
+  try {
+    return await import(modPath);
+  } catch(e) {
+    return null;
+  }
+}
+
+async function _loadModule(
+  appRoot: string,
+  moduleRoot: string,
+  module: string
+) {
+  const lambdaStylePath = path.resolve(appRoot, moduleRoot, module);
+  if (_canLoadAsFile(lambdaStylePath)) {
+    let func = await _tryModule(`${lambdaStylePath}.js`);
+    if (func === typeof Function) {
+      return func;
+    } else {
+       func = await _tryModule(`${lambdaStylePath}.mjs`);
+      if (func === typeof Function) {
+        return func;
+      }
+    }
+  } else {
+    throw Error("MODULE_NOT_FOUND");
   }
 }
 
@@ -143,9 +176,8 @@ export const load = function (
 ): HandlerFunction {
   _throwIfInvalidHandler(fullHandlerString);
 
-  const [moduleRoot, moduleAndHandler] = _moduleRootAndHandler(
-    fullHandlerString
-  );
+  const [moduleRoot, moduleAndHandler] =
+    _moduleRootAndHandler(fullHandlerString);
   const [module, handlerPath] = _splitHandlerString(moduleAndHandler);
 
   const userApp = _loadUserApp(appRoot, moduleRoot, module);

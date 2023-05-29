@@ -15,8 +15,8 @@ import {
   IHeaderData,
   IEnvironmentData,
   INVOKE_HEADER,
-} from "../Common";
-import LogPatch from "../utils/LogPatch";
+} from "../Common/index.js";
+import LogPatch from "../utils/LogPatch.js";
 
 const setCurrentRequestId = LogPatch.setCurrentRequestId;
 
@@ -152,8 +152,8 @@ function _parseJson(jsonString?: string, name?: string): string | undefined {
   if (jsonString !== undefined) {
     try {
       return JSON.parse(jsonString);
-    } catch (err: any) {
-      throw new Error(`Cannot parse ${name} as json: ${err.toString()}`);
+    } catch (err: unknown) {
+      throw new Error(`Cannot parse ${name} as json: ${(err as Error).toString()}`);
     }
   } else {
     return undefined;

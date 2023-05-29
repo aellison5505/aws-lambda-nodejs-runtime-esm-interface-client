@@ -18,6 +18,7 @@ export interface NativeClient {
   next: () => Promise<InvocationResponse>;
 }
 
+// eslint-disable-next-line no-shadow
 export enum INVOKE_HEADER {
   ClientContext = "lambda-runtime-client-context",
   CognitoIdentity = "lambda-runtime-cognito-identity",
@@ -79,6 +80,6 @@ export type HandlerFunction = (
   callback: CallbackFunction
 ) => PromiseLike<unknown> | unknown;
 
-export function isHandlerFunction(value: any): value is HandlerFunction {
+export function isHandlerFunction(value: unknown): value is HandlerFunction {
   return typeof value === "function";
 }
