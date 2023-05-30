@@ -4,9 +4,5 @@
     { "path": "../../src" }
   ],
   "compilerOptions": {
-    "types": [
-      "node",
-      "mocha"
-    ]
   }
 }

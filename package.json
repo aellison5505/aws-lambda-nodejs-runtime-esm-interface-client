@@ -1,11 +1,12 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
   "module": "lib/index.js",
   "gypfile": true,
+  "keywords": [ "AWS", "ES", "module", "Lambda", "Runtime"],
   "scripts": {
     "archive": "npx rimraf aws-lambda-ric-*.tgz && npm install && npm run build && npm pack",
     "clean": "npx rimraf {build, node_modules} && npx rimraf deps/{build_complete.txt, aws-lambda-cpp, curl}",
@@ -29,7 +30,10 @@
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "precommit": "npm run lint"
   },
-  "author": "Anthony Ellison",
+  "contributors": [
+    "AWS Lambda",
+    "Anthony Ellison"
+  ],
   "license": "Apache-2.0",
   "bin": "bin/index.js",
   "husky": {
