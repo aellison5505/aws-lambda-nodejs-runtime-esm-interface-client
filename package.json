@@ -6,7 +6,13 @@
   "type": "module",
   "module": "lib/index.js",
   "gypfile": true,
-  "keywords": [ "AWS", "ES", "module", "Lambda", "Runtime"],
+  "keywords": [
+    "AWS",
+    "ES",
+    "module",
+    "Lambda",
+    "Runtime"
+  ],
   "scripts": {
     "archive": "npx rimraf aws-lambda-ric-*.tgz && npm install && npm run build && npm pack",
     "clean": "npx rimraf {build, node_modules} && npx rimraf deps/{build_complete.txt, aws-lambda-cpp, curl}",
