@@ -54,7 +54,7 @@ function _splitHandlerString(handler: string): [string, string] {
  */
 function _resolveHandler(object: any, nestedProperty: string): any {
   return nestedProperty.split(".").reduce(async (nested, key) => {
-    console.log(nested);
+    //console.log(nested);
     
     return nested && nested[key];
   }, object);
@@ -129,10 +129,10 @@ async function _loadModule(
 ) {
   const lambdaStylePath = path.resolve(appRoot, moduleRoot, module);
   
-  console.log(lambdaStylePath);
+  //console.log(lambdaStylePath);
   const ext = _canLoadAsFile(lambdaStylePath);
   try {
-    console.log("waiting....");
+    //console.log("waiting....");
     
     const mod = await import(lambdaStylePath+ext)
     return mod;
@@ -181,10 +181,10 @@ export const load = async function (
 
    const userApp = await _loadUserApp(appRoot, moduleRoot, module)
  
-    console.log(userApp);
+    //console.log(userApp);
 
     const handlerFunc = await _resolveHandler(userApp, handlerPath);
-    console.log(handlerFunc);
+    //console.log(handlerFunc);
     
     if (!handlerFunc) {
       throw new HandlerNotFound(

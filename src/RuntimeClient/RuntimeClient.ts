@@ -56,7 +56,7 @@ export interface IRuntimeClient {
 
 function userAgent(): string {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const version = "2.1.0";
+  const version = process.env['npm_package_version'];
 
   return `aws-lambda-nodejs/${process.version}-${version}`;
 }

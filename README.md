@@ -5,7 +5,7 @@ We have open-sourced a set of software packages, Runtime Interface Clients (RIC)
   base images to be Lambda compatible.
 The Lambda Runtime Interface Client is a lightweight interface that allows your runtime to receive requests from and send requests to the Lambda service.
 
-The Lambda NodeJS Runtime Interface Client is vended through [npm](https://www.npmjs.com/package/aws-lambda-ric). 
+The Lambda NodeJS Runtime Interface Client is vended through [npm](https://www.npmjs.com/package/aws-lambda-ric-esm). 
 You can include this package in your preferred base image to make that base image Lambda compatible.
 
 ## Requirements
@@ -27,11 +27,11 @@ First step is to choose the base image to be used. The supported Linux OS distri
 
 The Runtime Interface Client can be installed outside of the Dockerfile as a dependency of the function we want to run in Lambda (run the below command in your function directory to add the dependency to `package.json`):
 ```shell script
-npm install aws-lambda-ric --save
+npm install aws-lambda-ric-esm --save
 ```
 or inside the Dockerfile:
 ```dockerfile
-RUN npm install aws-lambda-ric
+RUN npm install aws-lambda-ric-esm
 ```
 
 Next step would be to copy your Lambda function code into the image's working directory.
@@ -43,7 +43,7 @@ COPY myFunction/* ${FUNCTION_DIR}
 WORKDIR ${FUNCTION_DIR}
 
 # If the dependency is not in package.json uncomment the following line
-# RUN npm install aws-lambda-ric
+# RUN npm install aws-lambda-ric-esm
 
 RUN npm install
 ```
@@ -76,7 +76,7 @@ COPY myFunction/* ${FUNCTION_DIR}
 WORKDIR ${FUNCTION_DIR}
 
 # If the dependency is not in package.json uncomment the following line
-# RUN npm install aws-lambda-ric
+# RUN npm install aws-lambda-ric-esm
 
 RUN npm install
 
@@ -96,7 +96,7 @@ WORKDIR ${FUNCTION_DIR}
 # Copy in the built dependencies
 COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
 
-ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
+ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric-esm"]
 CMD ["app.handler"]
 ```
 
@@ -128,7 +128,7 @@ mkdir -p ~/.aws-lambda-rie && \
 docker run -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 \
     --entrypoint /aws-lambda/aws-lambda-rie \
     myfunction:latest \
-        /usr/local/bin/npx aws-lambda-ric app.handler
+        /usr/local/bin/npx aws-lambda-ric-esm app.handler
 ```
 
 This runs the image as a container and starts up an endpoint locally at `http://localhost:9000/2015-03-31/functions/function/invocations`. 

@@ -17,7 +17,7 @@ import LogPatch from "./utils/LogPatch.js";
 import * as UserFunction from "./utils/UserFunction.js";
 
 LogPatch.patchConsole();
-
+//console.log(process.env);
 export function run(appRoot: string, handler: string): void;
 export function run(handler: HandlerFunction): void;
 
@@ -60,8 +60,8 @@ export async function run(
   const handlerFunc = isHandlerFunction(appRootOrHandler)
     ? appRootOrHandler
     : (await UserFunction.load(appRootOrHandler, handler) as HandlerFunction);
-    console.log(handlerFunc);
-    
+    //console.log(handlerFunc);
+  
   const runtime = new Runtime(client, handlerFunc, errorCallbacks);
 
   runtime.scheduleIteration();

@@ -1,8 +1,8 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.1.0",
-  "description": "AWS Lambda Runtime Interface Client for NodeJs",
-  "homepage": "https://github.com/aws/aws-lambda-nodejs-runtime-interface-client",
+  "version": "2.2.3",
+  "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
+  "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
   "module": "lib/index.js",
   "gypfile": true,
@@ -29,7 +29,7 @@
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "precommit": "npm run lint"
   },
-  "author": "AWS Lambda",
+  "author": "Anthony Ellison",
   "license": "Apache-2.0",
   "bin": "bin/index.js",
   "husky": {
