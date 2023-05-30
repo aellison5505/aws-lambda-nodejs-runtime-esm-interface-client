@@ -11,8 +11,7 @@
     "prettier"
   ],
   "env": {
-    "node": true,
-    "es6": true
+    "node": true
   },
   "rules": {
     "@typescript-eslint/restrict-plus-operands": "error",
@@ -21,7 +20,7 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/ban-types": "warn",
-    "no-console": "warn",
+    "no-console": "off",
     "no-shadow": "warn"
   },
   "overrides": [

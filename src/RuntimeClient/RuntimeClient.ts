@@ -14,6 +14,14 @@ import {
   ClientRequest,
   OutgoingHttpHeaders,
 } from "http";
+
+const _http = await import("node:http");
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+const nRC = require('../../build/Release/runtime-client.node');
+
+
 import { URL } from "url";
 
 import { InvocationResponse, NativeClient } from "../Common/index.js";
@@ -48,7 +56,7 @@ export interface IRuntimeClient {
 
 function userAgent(): string {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const version = require("../../package.json").version;
+  const version = "2.1.0";
 
   return `aws-lambda-nodejs/${process.version}-${version}`;
 }
@@ -72,9 +80,9 @@ export default class RuntimeClient implements IRuntimeClient {
     httpClient?: HttpModule,
     nativeClient?: NativeClient
   ) {
-    this.http = httpClient || require("http");
+    this.http = httpClient || _http;
     this.nativeClient =
-      nativeClient || require("../../build/Release/runtime-client.node");
+      nativeClient || nRC;
     this.userAgent = userAgent();
     this.nativeClient.initializeClient(this.userAgent);
     this.useAlternativeClient =

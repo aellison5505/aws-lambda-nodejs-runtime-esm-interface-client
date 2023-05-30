@@ -13,7 +13,7 @@
     "update-deps": "./scripts/update_dependencies.sh",
     "preinstall": "./scripts/preinstall.sh",
     "postinstall": "./scripts/postinstall.sh",
-    "build": "npx rimraf lib && tsc -b src",
+    "build": "npx rimraf lib && tsc -b src -w",
     "build:gyp": "node-gyp rebuild",
     "postbuild": "npm run copy-files",
     "format": "npm run format:src && npm run format:test",

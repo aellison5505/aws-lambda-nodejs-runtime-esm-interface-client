@@ -10,13 +10,14 @@
 
 import path from "path";
 import fs from "fs";
-import { HandlerFunction } from "../Common/index.js";
+//import { HandlerFunction } from "../Common/index.js";
 import {
   HandlerNotFound,
   MalformedHandlerName,
   ImportModuleError,
   UserCodeSyntaxError,
 } from "../Errors/index.js";
+
 
 const FUNCTION_EXPR = /^([^.]*)\.(.*)$/;
 const RELATIVE_PATH_SUBSTRING = "..";
@@ -52,7 +53,9 @@ function _splitHandlerString(handler: string): [string, string] {
  * Resolve the user's handler function from the module.
  */
 function _resolveHandler(object: any, nestedProperty: string): any {
-  return nestedProperty.split(".").reduce((nested, key) => {
+  return nestedProperty.split(".").reduce(async (nested, key) => {
+    console.log(nested);
+    
     return nested && nested[key];
   }, object);
 }
@@ -63,10 +66,15 @@ function _resolveHandler(object: any, nestedProperty: string): any {
  * @param string - the fully resolved file path to the module
  * @return bool
  */
-function _canLoadAsFile(modulePath: string): boolean {
-  return (
-    fs.existsSync(modulePath + ".mjs") || fs.existsSync(modulePath + ".js")
-  );
+function _canLoadAsFile(modulePath: string): string {
+    try{
+      fs.existsSync(modulePath + ".mjs")
+      return ".mjs";
+    } catch (e) {
+      fs.existsSync(modulePath + ".js")
+      return ".js";
+    }
+
 }
 
 /**
@@ -96,13 +104,13 @@ function _tryRequire(appRoot: string, moduleRoot: string, module: string): any {
  *   1 - UserCodeSyntaxError if there's a syntax error while loading the module
  *   2 - ImportModuleError if the module cannot be found
  */
-function _loadUserApp(
+async function _loadUserApp(
   appRoot: string,
   moduleRoot: string,
   module: string
-): any {
+){
   try {
-    return _loadModule(appRoot, moduleRoot, module);
+   return await _loadModule(appRoot, moduleRoot, module)
   } catch (e: any) {
     if (e instanceof SyntaxError) {
       throw new UserCodeSyntaxError(<any>e);
@@ -114,31 +122,22 @@ function _loadUserApp(
   }
 }
 
-async function _tryModule(modPath:string) {
-  try {
-    return await import(modPath);
-  } catch(e) {
-    return null;
-  }
-}
-
 async function _loadModule(
   appRoot: string,
   moduleRoot: string,
   module: string
 ) {
   const lambdaStylePath = path.resolve(appRoot, moduleRoot, module);
-  if (_canLoadAsFile(lambdaStylePath)) {
-    let func = await _tryModule(`${lambdaStylePath}.js`);
-    if (func === typeof Function) {
-      return func;
-    } else {
-       func = await _tryModule(`${lambdaStylePath}.mjs`);
-      if (func === typeof Function) {
-        return func;
-      }
-    }
-  } else {
+  
+  console.log(lambdaStylePath);
+  const ext = _canLoadAsFile(lambdaStylePath);
+  try {
+    console.log("waiting....");
+    
+    const mod = await import(lambdaStylePath+ext)
+    return mod;
+     
+  } catch(e) {
     throw Error("MODULE_NOT_FOUND");
   }
 }
@@ -170,28 +169,33 @@ function _throwIfInvalidHandler(fullHandlerString: string): void {
  *       for traversing up the filesystem '..')
  *   Errors for scenarios known by the runtime, will be wrapped by Runtime.* errors.
  */
-export const load = function (
+export const load = async function (
   appRoot: string,
   fullHandlerString: string
-): HandlerFunction {
+):Promise<any> {
   _throwIfInvalidHandler(fullHandlerString);
 
   const [moduleRoot, moduleAndHandler] =
     _moduleRootAndHandler(fullHandlerString);
   const [module, handlerPath] = _splitHandlerString(moduleAndHandler);
 
-  const userApp = _loadUserApp(appRoot, moduleRoot, module);
-  const handlerFunc = _resolveHandler(userApp, handlerPath);
+   const userApp = await _loadUserApp(appRoot, moduleRoot, module)
+ 
+    console.log(userApp);
 
-  if (!handlerFunc) {
-    throw new HandlerNotFound(
-      `${fullHandlerString} is undefined or not exported`
-    );
-  }
+    const handlerFunc = await _resolveHandler(userApp, handlerPath);
+    console.log(handlerFunc);
+    
+    if (!handlerFunc) {
+      throw new HandlerNotFound(
+        `${fullHandlerString} is undefined or not exported`
+      );
+    }
+  
+    if (typeof handlerFunc !== typeof Function ) {
+      throw new HandlerNotFound(`${fullHandlerString} is not a function`);
+    }
+  
+    return handlerFunc;
 
-  if (typeof handlerFunc !== "function") {
-    throw new HandlerNotFound(`${fullHandlerString} is not a function`);
-  }
-
-  return handlerFunc;
 };

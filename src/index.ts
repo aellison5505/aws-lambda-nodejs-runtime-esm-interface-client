@@ -21,11 +21,11 @@ LogPatch.patchConsole();
 export function run(appRoot: string, handler: string): void;
 export function run(handler: HandlerFunction): void;
 
-export function run(
+export async function run(
   appRootOrHandler: string | HandlerFunction,
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   handler: string = ""
-): void {
+): Promise<void> {
   if (!process.env.AWS_LAMBDA_RUNTIME_API) {
     throw new Error("Missing Runtime API Server configuration.");
   }
@@ -59,7 +59,9 @@ export function run(
 
   const handlerFunc = isHandlerFunction(appRootOrHandler)
     ? appRootOrHandler
-    : (UserFunction.load(appRootOrHandler, handler) as HandlerFunction);
+    : (await UserFunction.load(appRootOrHandler, handler) as HandlerFunction);
+    console.log(handlerFunc);
+    
   const runtime = new Runtime(client, handlerFunc, errorCallbacks);
 
   runtime.scheduleIteration();
