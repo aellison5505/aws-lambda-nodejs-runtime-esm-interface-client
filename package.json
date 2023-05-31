@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
@@ -83,6 +83,5 @@
     "should": "13.2.3",
     "ts-mocha": "10.0.0",
     "typescript": "4.9.5"
-  },
-  "packageManager": "pnpm@8.6.0"
+  }
 }
