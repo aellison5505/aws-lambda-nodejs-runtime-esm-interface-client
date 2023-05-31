@@ -110,7 +110,9 @@ out
 .tern-port
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+.vscode-
+
+.pnpm-store
 
 # yarn v2
 .yarn/cache
