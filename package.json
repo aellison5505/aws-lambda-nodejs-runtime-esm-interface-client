@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
@@ -14,27 +14,27 @@
     "Runtime"
   ],
   "scripts": {
-    "archive": "pnpm rimraf aws-lambda-ric-*.tgz && pnpm install && pnpm run build && pnpm pack",
-    "clean": "pnpm add rimraf && pnpm rimraf {build, node_modules} && pnpm rimraf deps/{build_complete.txt, aws-lambda-cpp, curl}",
+    "archive": "npm rimraf aws-lambda-ric-*.tgz && npm install && npm run build && npm pack",
+    "clean": "npm add rimraf && npm rimraf {build, node_modules} && npm rimraf deps/{build_complete.txt, aws-lambda-cpp, curl}",
     "copy-files": "mkdir -p lib/RuntimeClient && cp src/RuntimeClient/runtime-client.cc lib/RuntimeClient/runtime-client.cc",
     "update-deps": "./scripts/update_dependencies.sh",
     "preinstall": "./scripts/preinstall.sh",
     "postinstall": "./scripts/postinstall.sh",
-    "build": "pnpm rimraf lib && tsc -b src",
-    "build:gyp": "pnpm copy-files && node-gyp rebuild",
-    "postbuild": "pnpm run copy-files",
-    "format": "pnpm run format:src && pnpm run format:test",
+    "build": "npm rimraf lib && tsc -b src",
+    "build:gyp": "npm run copy-files && node-gyp rebuild",
+    "postbuild": "npm run copy-files",
+    "format": "npm run format:src && npm run format:test",
     "format:src": "prettier --check \"src/**/*.ts\" --write",
     "format:test": "prettier --check \"test/**/*.ts\" --write",
     "lint": "eslint --ext \".ts,.js\" src",
-    "test": "pnpm run test:unit",
+    "test": "npm run test:unit",
     "test:unit": "ts-mocha test/unit/**/*.test.ts --reporter ./test/utils/StdoutReporter -p ./test/unit/tsconfig.json",
     "test:unit:watch": "ts-mocha test/unit/**/*.test.ts --reporter ./test/utils/StdoutReporter --watch-extensions ts --watch --watch-files src, test/unit/**/*.ts -p ./test/unit/tsconfig.json",
-    "test:coverage": "nyc pnpm run test:unit",
+    "test:coverage": "nyc npm run test:unit",
     "tsc": "tsc -b src",
     "tsc:watch": "tsc -b src --watch",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && pnpm install",
-    "precommit": "pnpm run lint"
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
+    "precommit": "npm run lint"
   },
   "contributors": [
     "AWS Lambda",
@@ -46,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm run precommit"
+      "pre-commit": "npm run precommit"
     }
   },
   "nyc": {

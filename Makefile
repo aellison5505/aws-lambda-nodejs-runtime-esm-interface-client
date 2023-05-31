@@ -5,11 +5,11 @@ target:
 
 .PHONY: init
 init:
-	pnpm install
+	npm install
 
 .PHONY: test
 test:
-	pnpm run test
+	npm run test
 
 .PHONY: setup-codebuild-agent
 setup-codebuild-agent:
@@ -25,15 +25,15 @@ test-integ: setup-codebuild-agent
 
 .PHONY: copy-files
 copy-files:
-	pnpm run copy-files
+	npm run copy-files
 
 .PHONY: install
 install:
-	BUILD=$(BUILD) pnpm install
+	BUILD=$(BUILD) npm install
 
 .PHONY: format
 format:
-	pnpm run format
+	npm run format
 
 # Command to run everytime you make changes to verify everything works
 .PHONY: dev
@@ -45,16 +45,16 @@ pr: build dev test-smoke
 
 .PHONY: clean
 clean:
-	pnpm run clean
+	npm run clean
 
 .PHONY: build
 build: copy-files
 	make install BUILD=1
-	pnpm run build
+	npm run build
 
 .PHONY: pack
 pack: build
-	pnpm pack
+	npm pack
 
 define HELP_MESSAGE
 
