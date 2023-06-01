@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.3.2",
+  "version": "2.3.11",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
@@ -42,7 +42,14 @@
   ],
   "license": "Apache-2.0",
   "bin": {
-    "aws-lambda-ric-esm" :"bin/index.js"
+    "aws-lambda-ric-esm": "bin/index.js"
+  },
+  "publishConfig": {
+    "executableFiles": [
+      "./scripts/postinstall.sh",
+      "./scripts/preinstall.sh",
+      "./scripts/update_dependencies.sh"
+    ]
   },
   "husky": {
     "hooks": {
@@ -65,7 +72,8 @@
   },
   "dependencies": {
     "node-addon-api": "6.0.0",
-    "node-gyp": "9.3.1"
+    "node-gyp": "9.3.1",
+    "semver": "^7.5.1"
   },
   "devDependencies": {
     "@types/mocha": "10.0.1",
