@@ -1,4 +1,3 @@
-build
 .DS_Store
 
 test/integration/resources/init
@@ -110,8 +109,9 @@ out
 .tern-port
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-
+.vscode
 
+#pnpm store
 .pnpm-store
 
 # yarn v2
@@ -121,5 +121,12 @@ out
 .yarn/install-state.gz
 .pnp.*
 .idea/
+
 .env*
+
+tar
+
+
+
+
 

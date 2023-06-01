@@ -16,7 +16,7 @@ import {
 } from "http";
 
 const _http = await import("node:http");
-import { createRequire } from 'module';
+import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 import { URL } from "url";
@@ -52,9 +52,8 @@ export interface IRuntimeClient {
 }
 
 function userAgent(): string {
-  
-  const pk =  require("../../package.json")
-   
+  const pk = require("../../package.json");
+
   return `aws-lambda-nodejs/${process.version}-${pk.version}`;
 }
 
@@ -79,7 +78,7 @@ export default class RuntimeClient implements IRuntimeClient {
   ) {
     this.http = httpClient || _http;
     this.nativeClient =
-      nativeClient || require('../../build/Release/runtime-client.node');
+      nativeClient || require("../../build/Release/runtime-client.node");
     this.userAgent = userAgent();
     this.nativeClient.initializeClient(this.userAgent);
     this.useAlternativeClient =

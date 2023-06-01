@@ -49,7 +49,7 @@ INCS_Debug := \
 	-I/root/.cache/node-gyp/18.16.0/deps/uv/include \
 	-I/root/.cache/node-gyp/18.16.0/deps/zlib \
 	-I/root/.cache/node-gyp/18.16.0/deps/v8/include \
-	-I/usr/src/task/.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api \
+	-I/usr/src/task/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api \
 	-I$(srcdir)/deps/artifacts/include
 
 DEFS_Release := \
@@ -96,7 +96,7 @@ INCS_Release := \
 	-I/root/.cache/node-gyp/18.16.0/deps/uv/include \
 	-I/root/.cache/node-gyp/18.16.0/deps/zlib \
 	-I/root/.cache/node-gyp/18.16.0/deps/v8/include \
-	-I/usr/src/task/.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api \
+	-I/usr/src/task/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api \
 	-I$(srcdir)/deps/artifacts/include
 
 OBJS := \
@@ -106,7 +106,7 @@ OBJS := \
 all_deps += $(OBJS)
 
 # Make sure our dependencies are built before any of us.
-$(OBJS): | $(builddir)/nothing.a $(obj).target/.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api/nothing.a
+$(OBJS): | $(builddir)/nothing.a $(obj).target/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api/nothing.a
 
 # CFLAGS et al overrides must be target-local.
 # See "Target-specific Variable Values" in the GNU Make manual.
@@ -148,13 +148,12 @@ LDFLAGS_Release := \
 LIBS := \
 	-laws-lambda-runtime \
 	/usr/src/task/deps/artifacts/lib/libcurl.a \
-	-lbrotlidec \
 	-pthread
 
 $(obj).target/runtime-client.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/runtime-client.node: LIBS := $(LIBS)
 $(obj).target/runtime-client.node: TOOLSET := $(TOOLSET)
-$(obj).target/runtime-client.node: $(OBJS) $(obj).target/.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api/nothing.a FORCE_DO_CMD
+$(obj).target/runtime-client.node: $(OBJS) $(obj).target/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api/nothing.a FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
 all_deps += $(obj).target/runtime-client.node

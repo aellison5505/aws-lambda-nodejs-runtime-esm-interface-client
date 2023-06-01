@@ -153,7 +153,9 @@ function _parseJson(jsonString?: string, name?: string): string | undefined {
     try {
       return JSON.parse(jsonString);
     } catch (err: unknown) {
-      throw new Error(`Cannot parse ${name} as json: ${(err as Error).toString()}`);
+      throw new Error(
+        `Cannot parse ${name} as json: ${(err as Error).toString()}`
+      );
     }
   } else {
     return undefined;

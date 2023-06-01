@@ -333,8 +333,8 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.S FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api/nothing.target.mk)))),)
-  include .yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api/nothing.target.mk
+                 $(join ^,node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api/nothing.target.mk)))),)
+  include node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api/nothing.target.mk
 endif
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
@@ -343,8 +343,8 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /usr/src/task/.yarn/unplugged/node-gyp-npm-9.3.1-43540bab9c/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/root/.cache/node-gyp/18.16.0" "-Dnode_gyp_dir=/usr/src/task/.yarn/unplugged/node-gyp-npm-9.3.1-43540bab9c/node_modules/node-gyp" "-Dnode_lib_file=/root/.cache/node-gyp/18.16.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/usr/src/task" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/usr/src/task/build/config.gypi -I/usr/src/task/.yarn/unplugged/node-gyp-npm-9.3.1-43540bab9c/node_modules/node-gyp/addon.gypi -I/root/.cache/node-gyp/18.16.0/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/.yarn/unplugged/node-addon-api-npm-6.0.0-150a5934ad/node_modules/node-addon-api/node_api.gyp $(srcdir)/binding.gyp $(srcdir)/../../../root/.cache/node-gyp/18.16.0/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/.yarn/unplugged/node-gyp-npm-9.3.1-43540bab9c/node_modules/node-gyp/addon.gypi
+cmd_regen_makefile = cd $(srcdir); /usr/src/task/node_modules/.pnpm/node-gyp@9.3.1/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/root/.cache/node-gyp/18.16.0" "-Dnode_gyp_dir=/usr/src/task/node_modules/.pnpm/node-gyp@9.3.1/node_modules/node-gyp" "-Dnode_lib_file=/root/.cache/node-gyp/18.16.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/usr/src/task" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/usr/src/task/build/config.gypi -I/usr/src/task/node_modules/.pnpm/node-gyp@9.3.1/node_modules/node-gyp/addon.gypi -I/root/.cache/node-gyp/18.16.0/include/node/common.gypi "--toplevel-dir=." binding.gyp
+Makefile: $(srcdir)/binding.gyp $(srcdir)/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api/node_api.gyp $(srcdir)/../../../root/.cache/node-gyp/18.16.0/include/node/common.gypi $(srcdir)/node_modules/.pnpm/node-gyp@9.3.1/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

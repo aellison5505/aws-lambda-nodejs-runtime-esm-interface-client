@@ -402,6 +402,16 @@
     "want_separate_host_toolset": 0,
     "nodedir": "/root/.cache/node-gyp/18.16.0",
     "standalone_static_library": 1,
-    "user_agent": "yarn/3.5.1 npm/? node/v18.16.0 linux x64"
+    "user_agent": "pnpm/8.6.0 npm/? node/v18.16.0 linux x64",
+    "userconfig": "/root/.npmrc",
+    "local_prefix": "/usr/src/task",
+    "metrics_registry": "https://registry.npmjs.org/",
+    "prefix": "/usr/local",
+    "registry": "https://registry.npmjs.org/",
+    "cache": "/root/.npm",
+    "node_gyp": "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "globalconfig": "/usr/local/etc/npmrc",
+    "init_module": "/root/.npm-init.js",
+    "global_prefix": "/usr/local"
   }
 }

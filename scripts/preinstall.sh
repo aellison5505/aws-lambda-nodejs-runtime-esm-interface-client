@@ -1,4 +1,4 @@
-#!/bin/sh -v
+#!/bin/sh
 # Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 set -e
 

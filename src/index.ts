@@ -59,9 +59,9 @@ export async function run(
 
   const handlerFunc = isHandlerFunction(appRootOrHandler)
     ? appRootOrHandler
-    : (await UserFunction.load(appRootOrHandler, handler) as HandlerFunction);
-    //console.log(handlerFunc);
-  
+    : ((await UserFunction.load(appRootOrHandler, handler)) as HandlerFunction);
+  //console.log(handlerFunc);
+
   const runtime = new Runtime(client, handlerFunc, errorCallbacks);
 
   runtime.scheduleIteration();

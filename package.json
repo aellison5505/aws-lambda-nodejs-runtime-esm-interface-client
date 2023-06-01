@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.3.11",
+  "version": "2.3.13-rc.0",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
@@ -20,8 +20,8 @@
     "update-deps": "./scripts/update_dependencies.sh",
     "preinstall": "./scripts/preinstall.sh",
     "postinstall": "./scripts/postinstall.sh",
-    "build": "npm rimraf lib && tsc -b src",
-    "build:gyp": "npm run copy-files && node-gyp rebuild",
+    "build": "npm rimraf lib && tsc -b src && npm run postbuild",
+    "build:gyp": "node-gyp rebuild",
     "postbuild": "npm run copy-files",
     "format": "npm run format:src && npm run format:test",
     "format:src": "prettier --check \"src/**/*.ts\" --write",

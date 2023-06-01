@@ -1,5 +1,7 @@
-build
 .DS_Store
+
+test/integration/resources/init
+aws-lambda-rie
 
 src
 test
@@ -15,6 +17,7 @@ lerna-debug.log*
 # IDEs
 .idea
 *.iml
+.tar
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -48,8 +51,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
-jspm_packages/
+node_modules
+jspm_packages
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -116,7 +119,10 @@ out
 .tern-port
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+.vscode
+
+#pnpm store
+.pnpm-store
 
 # yarn v2
 .yarn/cache
@@ -124,6 +130,11 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.idea/
+
+.env*
+
+tar
 
 # git
 .git*
@@ -131,4 +142,5 @@ out
 # Docker
 .dockerignore
 
-Makefile
+#test scripts
+.test-*.sh

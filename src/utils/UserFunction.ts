@@ -18,7 +18,6 @@ import {
   UserCodeSyntaxError,
 } from "../Errors/index.js";
 
-
 const FUNCTION_EXPR = /^([^.]*)\.(.*)$/;
 const RELATIVE_PATH_SUBSTRING = "..";
 
@@ -55,7 +54,7 @@ function _splitHandlerString(handler: string): [string, string] {
 function _resolveHandler(object: any, nestedProperty: string): any {
   return nestedProperty.split(".").reduce(async (nested, key) => {
     //console.log(nested);
-    
+
     return nested && nested[key];
   }, object);
 }
@@ -67,14 +66,13 @@ function _resolveHandler(object: any, nestedProperty: string): any {
  * @return bool
  */
 function _canLoadAsFile(modulePath: string): string {
-    try{
-      fs.existsSync(modulePath + ".mjs")
-      return ".mjs";
-    } catch (e) {
-      fs.existsSync(modulePath + ".js")
-      return ".js";
-    }
-
+  try {
+    fs.existsSync(modulePath + ".mjs");
+    return ".mjs";
+  } catch (e) {
+    fs.existsSync(modulePath + ".js");
+    return ".js";
+  }
 }
 
 /**
@@ -108,9 +106,9 @@ async function _loadUserApp(
   appRoot: string,
   moduleRoot: string,
   module: string
-){
+) {
   try {
-   return await _loadModule(appRoot, moduleRoot, module)
+    return await _loadModule(appRoot, moduleRoot, module);
   } catch (e: any) {
     if (e instanceof SyntaxError) {
       throw new UserCodeSyntaxError(<any>e);
@@ -128,16 +126,15 @@ async function _loadModule(
   module: string
 ) {
   const lambdaStylePath = path.resolve(appRoot, moduleRoot, module);
-  
+
   //console.log(lambdaStylePath);
   const ext = _canLoadAsFile(lambdaStylePath);
   try {
     //console.log("waiting....");
-    
-    const mod = await import(lambdaStylePath+ext)
+
+    const mod = await import(lambdaStylePath + ext);
     return mod;
-     
-  } catch(e) {
+  } catch (e) {
     throw Error("MODULE_NOT_FOUND");
   }
 }
@@ -172,30 +169,29 @@ function _throwIfInvalidHandler(fullHandlerString: string): void {
 export const load = async function (
   appRoot: string,
   fullHandlerString: string
-):Promise<any> {
+): Promise<any> {
   _throwIfInvalidHandler(fullHandlerString);
 
   const [moduleRoot, moduleAndHandler] =
     _moduleRootAndHandler(fullHandlerString);
   const [module, handlerPath] = _splitHandlerString(moduleAndHandler);
 
-   const userApp = await _loadUserApp(appRoot, moduleRoot, module)
- 
-    //console.log(userApp);
+  const userApp = await _loadUserApp(appRoot, moduleRoot, module);
 
-    const handlerFunc = await _resolveHandler(userApp, handlerPath);
-    //console.log(handlerFunc);
-    
-    if (!handlerFunc) {
-      throw new HandlerNotFound(
-        `${fullHandlerString} is undefined or not exported`
-      );
-    }
-  
-    if (typeof handlerFunc !== typeof Function ) {
-      throw new HandlerNotFound(`${fullHandlerString} is not a function`);
-    }
-  
-    return handlerFunc;
+  //console.log(userApp);
 
+  const handlerFunc = await _resolveHandler(userApp, handlerPath);
+  //console.log(handlerFunc);
+
+  if (!handlerFunc) {
+    throw new HandlerNotFound(
+      `${fullHandlerString} is undefined or not exported`
+    );
+  }
+
+  if (typeof handlerFunc !== typeof Function) {
+    throw new HandlerNotFound(`${fullHandlerString} is not a function`);
+  }
+
+  return handlerFunc;
 };
