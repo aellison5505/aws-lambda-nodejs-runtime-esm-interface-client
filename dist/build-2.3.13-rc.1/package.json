@@ -1,0 +1,97 @@
+{
+  "name": "aws-lambda-ric-esm",
+  "version": "2.3.13-rc.1",
+  "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
+  "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
+  "type": "module",
+  "module": "lib/index.js",
+  "gypfile": true,
+  "keywords": [
+    "AWS",
+    "ES",
+    "module",
+    "Lambda",
+    "Runtime"
+  ],
+  "scripts": {
+    "archive": "npm rimraf aws-lambda-ric-*.tgz && npm install && npm run build && npm pack",
+    "clean": "npm add rimraf && npm rimraf {build, node_modules} && npm rimraf deps/{build_complete.txt, aws-lambda-cpp, curl}",
+    "copy-files": "mkdir -p lib/RuntimeClient && cp src/RuntimeClient/runtime-client.cc lib/RuntimeClient/runtime-client.cc",
+    "update-deps": "./scripts/update_dependencies.sh",
+    "preinstall": "./scripts/preinstall.sh",
+    "postinstall": "./scripts/postinstall.sh",
+    "build": "npm rimraf lib && tsc -b src && npm run postbuild",
+    "build:gyp": "node-gyp rebuild",
+    "postbuild": "npm run copy-files",
+    "format": "npm run format:src && npm run format:test",
+    "format:src": "prettier --check \"src/**/*.ts\" --write",
+    "format:test": "prettier --check \"test/**/*.ts\" --write",
+    "lint": "eslint --ext \".ts,.js\" src",
+    "test": "npm run test:unit",
+    "test:unit": "ts-mocha test/unit/**/*.test.ts --reporter ./test/utils/StdoutReporter -p ./test/unit/tsconfig.json",
+    "test:unit:watch": "ts-mocha test/unit/**/*.test.ts --reporter ./test/utils/StdoutReporter --watch-extensions ts --watch --watch-files src, test/unit/**/*.ts -p ./test/unit/tsconfig.json",
+    "test:coverage": "nyc npm run test:unit",
+    "tsc": "tsc -b src",
+    "tsc:watch": "tsc -b src --watch",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
+    "precommit": "npm run lint",
+    "dist:build": "./dist_build.sh",
+    "build:prod": "tsc --project src/tsconfig.prod.json && npm run postbuild"
+  },
+  "contributors": [
+    "AWS Lambda",
+    "Anthony Ellison"
+  ],
+  "license": "Apache-2.0",
+  "bin": {
+    "aws-lambda-ric-esm": "bin/index.js"
+  },
+  "publishConfig": {
+    "executableFiles": [
+      "./scripts/postinstall.sh",
+      "./scripts/preinstall.sh",
+      "./scripts/update_dependencies.sh"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "check-coverage": true,
+    "branches": 65,
+    "lines": 75,
+    "functions": 65,
+    "statements": 75
+  },
+  "dependencies": {
+    "node-addon-api": "6.0.0",
+    "node-gyp": "9.3.1",
+    "semver": "^7.5.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.1",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "5.58.0",
+    "@typescript-eslint/parser": "5.58.0",
+    "eslint": "8.38.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.3",
+    "mocha": "10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "2.8.7",
+    "rimraf": "^5.0.1",
+    "should": "13.2.3",
+    "ts-mocha": "10.0.0",
+    "typescript": "4.9.5"
+  }
+}

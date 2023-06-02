@@ -28,12 +28,12 @@ exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 supported_protocols="DICT FILE FTP GOPHER HTTP IMAP MQTT POP3 RTSP SMTP TELNET TFTP"
-supported_features="AsynchDNS IPv6 Largefile UnixSockets alt-svc"
+supported_features="AsynchDNS HTTP2 IPv6 Largefile UnixSockets alt-svc brotli"
 
 Name: libcurl
 URL: https://curl.se/
 Description: Library to transfer files with ftp, http, etc.
 Version: 7.83.1-DEV
-Libs: -L${libdir} -lcurl  -pthread
-Libs.private: -pthread
+Libs: -L${libdir} -lcurl -lnghttp2  -lbrotlidec  
+Libs.private: -lnghttp2 -lbrotlidec
 Cflags: -I${includedir} -DCURL_STATICLIB

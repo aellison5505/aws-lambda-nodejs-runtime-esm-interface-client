@@ -84,7 +84,7 @@ while test $# -gt 0; do
         ;;
 
     --feature|--features)
-        for feature in AsynchDNS IPv6 Largefile UnixSockets alt-svc ""; do
+        for feature in AsynchDNS HTTP2 IPv6 Largefile UnixSockets alt-svc brotli ""; do
             test -n "$feature" && echo "$feature"
         done
         ;;
@@ -161,7 +161,7 @@ while test $# -gt 0; do
            CURLLIBDIR=""
         fi
         if test "Xno" = "Xno"; then
-          echo ${CURLLIBDIR}-lcurl -pthread
+          echo ${CURLLIBDIR}-lcurl -lnghttp2 -lbrotlidec
         else
           echo ${CURLLIBDIR}-lcurl
         fi
@@ -172,7 +172,7 @@ while test $# -gt 0; do
 
     --static-libs)
         if test "Xyes" != "Xno" ; then
-          echo ${exec_prefix}/lib/libcurl.a  -pthread
+          echo ${exec_prefix}/lib/libcurl.a  -lnghttp2 -lbrotlidec
         else
           echo "curl was built with static libraries disabled" >&2
           exit 1

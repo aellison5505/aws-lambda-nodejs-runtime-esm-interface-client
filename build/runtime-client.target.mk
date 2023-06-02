@@ -42,13 +42,13 @@ CFLAGS_CC_Debug := \
 	-fPIC
 
 INCS_Debug := \
-	-I/root/.cache/node-gyp/18.16.0/include/node \
-	-I/root/.cache/node-gyp/18.16.0/src \
-	-I/root/.cache/node-gyp/18.16.0/deps/openssl/config \
-	-I/root/.cache/node-gyp/18.16.0/deps/openssl/openssl/include \
-	-I/root/.cache/node-gyp/18.16.0/deps/uv/include \
-	-I/root/.cache/node-gyp/18.16.0/deps/zlib \
-	-I/root/.cache/node-gyp/18.16.0/deps/v8/include \
+	-I/root/.cache/node-gyp/18.12.1/include/node \
+	-I/root/.cache/node-gyp/18.12.1/src \
+	-I/root/.cache/node-gyp/18.12.1/deps/openssl/config \
+	-I/root/.cache/node-gyp/18.12.1/deps/openssl/openssl/include \
+	-I/root/.cache/node-gyp/18.12.1/deps/uv/include \
+	-I/root/.cache/node-gyp/18.12.1/deps/zlib \
+	-I/root/.cache/node-gyp/18.12.1/deps/v8/include \
 	-I/usr/src/task/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api \
 	-I$(srcdir)/deps/artifacts/include
 
@@ -89,13 +89,13 @@ CFLAGS_CC_Release := \
 	-fPIC
 
 INCS_Release := \
-	-I/root/.cache/node-gyp/18.16.0/include/node \
-	-I/root/.cache/node-gyp/18.16.0/src \
-	-I/root/.cache/node-gyp/18.16.0/deps/openssl/config \
-	-I/root/.cache/node-gyp/18.16.0/deps/openssl/openssl/include \
-	-I/root/.cache/node-gyp/18.16.0/deps/uv/include \
-	-I/root/.cache/node-gyp/18.16.0/deps/zlib \
-	-I/root/.cache/node-gyp/18.16.0/deps/v8/include \
+	-I/root/.cache/node-gyp/18.12.1/include/node \
+	-I/root/.cache/node-gyp/18.12.1/src \
+	-I/root/.cache/node-gyp/18.12.1/deps/openssl/config \
+	-I/root/.cache/node-gyp/18.12.1/deps/openssl/openssl/include \
+	-I/root/.cache/node-gyp/18.12.1/deps/uv/include \
+	-I/root/.cache/node-gyp/18.12.1/deps/zlib \
+	-I/root/.cache/node-gyp/18.12.1/deps/v8/include \
 	-I/usr/src/task/node_modules/.pnpm/node-addon-api@6.0.0/node_modules/node-addon-api \
 	-I$(srcdir)/deps/artifacts/include
 
@@ -148,7 +148,8 @@ LDFLAGS_Release := \
 LIBS := \
 	-laws-lambda-runtime \
 	/usr/src/task/deps/artifacts/lib/libcurl.a \
-	-pthread
+	-lnghttp2 \
+	-lbrotlidec
 
 $(obj).target/runtime-client.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/runtime-client.node: LIBS := $(LIBS)
