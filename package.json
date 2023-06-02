@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-ric-esm",
-  "version": "2.3.13-rc.0",
+  "version": "2.3.13-rc.1",
   "description": "AWS Lambda Runtime Interface Client for NodeJs ES Modules",
   "homepage": "https://github.com/aellison5505/aws-lambda-nodejs-runtime-esm-interface-client.git",
   "type": "module",
@@ -34,7 +34,9 @@
     "tsc": "tsc -b src",
     "tsc:watch": "tsc -b src --watch",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "dist:build": "./dist_build.sh",
+    "build:prod": "tsc --project src/tsconfig.prod.json && npm run postbuild"
   },
   "contributors": [
     "AWS Lambda",
