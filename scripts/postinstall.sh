@@ -24,8 +24,8 @@ if test "${current_path#*$node_modules_path}" != "$current_path" || [ "$BUILD" !
     rm -rf "$deps_path"/curl*[^gz]$
 fi
 
-    #rm -Rf deps/curl*/
-    #rm -Rf deps/aws*/
-    #rm -Rf deps/artifacts
+    rm -Rf deps/curl*/
+    rm -Rf deps/aws*/
+    rm -Rf deps/artifacts
 
 

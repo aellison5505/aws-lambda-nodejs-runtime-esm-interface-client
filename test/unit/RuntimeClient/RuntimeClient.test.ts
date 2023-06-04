@@ -1,12 +1,11 @@
 /** Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved. */
 
 "use strict";
-
-require("should");
-import RuntimeClient from "../../../src/RuntimeClient";
-import * as runtimeErrors from "../../../src/Errors";
-import { StubHttp } from "../utils/StubHttp";
-import { NoOpNativeHttp } from "../utils/NoOpNativeHttp";
+await import("should");
+import RuntimeClient from "../../../src/RuntimeClient/index.js";
+import * as runtimeErrors from "../../../src/Errors/index.js";
+import { StubHttp } from "../utils/StubHttp.js";
+import { NoOpNativeHttp } from "../utils/NoOpNativeHttp.js";
 
 class EvilError extends Error {
   get name(): string {

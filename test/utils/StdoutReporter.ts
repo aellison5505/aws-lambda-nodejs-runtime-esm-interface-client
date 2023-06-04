@@ -18,7 +18,7 @@ const {
  * enables clean test output even when applying the lambda-runtime console
  * patch.
  */
-module.exports = class StdoutReporter extends reporters.Base {
+export class StdoutReporter extends reporters.Base {
   private _alreadyWritten: boolean;
   private _report: string;
   private _indents: number;
@@ -32,7 +32,7 @@ module.exports = class StdoutReporter extends reporters.Base {
     const stats = runner.stats;
 
     runner
-      .once(EVENT_RUN_BEGIN, () => {})
+      .once(EVENT_RUN_BEGIN, () => { return })
       .on(EVENT_SUITE_BEGIN, (suite) => {
         this.log(suite.title);
         this.increaseIndent();
@@ -52,9 +52,9 @@ module.exports = class StdoutReporter extends reporters.Base {
       .once(EVENT_RUN_END, () => {
         this.log(
           "Results " +
-            stats.passes +
+            (stats.passes).toString() +
             " passed out of " +
-            (stats.passes + stats.failures) +
+            (stats.passes + stats.failures).toString() +
             " total tests"
         );
         this.dumpReport();

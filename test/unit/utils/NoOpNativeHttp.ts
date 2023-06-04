@@ -1,6 +1,6 @@
 /** Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved. */
 
-import { NativeClient, InvocationResponse } from "../../../src/Common";
+import { NativeClient, InvocationResponse } from "../../../src/Common/index.js";
 
 export class NoOpNativeHttp implements NativeClient {
   done(): void {
@@ -12,6 +12,7 @@ export class NoOpNativeHttp implements NativeClient {
   next(): Promise<InvocationResponse> {
     return Promise.resolve(null as any);
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   initializeClient(_userAgent: string): void {
     /*NoOp*/
   }

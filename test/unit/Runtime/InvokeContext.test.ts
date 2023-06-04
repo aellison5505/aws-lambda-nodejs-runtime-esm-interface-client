@@ -1,13 +1,12 @@
 /** Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved. */
 
 "use strict";
-
-require("should");
+await import("should");
 import utilModule from "util";
 
 const sleep = utilModule.promisify(setTimeout);
 
-import InvokeContext from "../../../src/Runtime/InvokeContext";
+import InvokeContext from "../../../src/Runtime/InvokeContext.js";
 
 describe("Getting remaining invoke time", () => {
   it("should reduce by at least elapsed time", async () => {
