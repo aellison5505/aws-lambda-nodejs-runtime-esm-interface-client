@@ -26,7 +26,9 @@ pnpm run build:prod --outDir dist/"$full"/lib
 
 cd dist/"$full"
 
-pnpm run postbuild
+cp src/RuntimeClient/runtime-client.cc lib/RuntimeClient/runtime-client.cc
+
+rm -R src
 
 pnpm pack
 
