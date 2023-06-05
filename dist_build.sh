@@ -20,9 +20,13 @@ cp -R deps/patches dist/"$full"/deps/patches
 cp -R deps/versions deps/aws-lambda-cpp-0.2.8.tar.gz deps/curl-7_83_1.tar.gz dist/"$full"/deps
 
 
+export NODE_ENV=production
+
+pnpm run build:prod --outDir dist/"$full"/lib
+
 cd dist/"$full"
 
-pnpm run build:prod
+pnpm run postbuild
 
 pnpm pack
 
