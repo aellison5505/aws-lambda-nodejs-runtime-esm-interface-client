@@ -6,4 +6,4 @@ docker run --rm -ti -v ~/.aws:/root/.aws -w /usr/src/task -v $(pwd):/usr/src/tas
 
 # docker run --rm -ti -v ~/.aws:/root/.aws -w /usr/src/task -v /root/dev/JBMDLFesPOSystem/.aws-lambda-rie:/usr/src/rie -v $(pwd):/usr/src/task/ --env-file ./.env -p 9080:8080  --entrypoint /bin/bash node-lts 
 
-# curl -XPOST "http://localhost:9080/2015-03-31/functions/function/invocations" -d {test:"test"}
+# curl -XPOST "http://localhost:9080/2015-03-31/functions/function/invocations" -d '{"test":"test"}'
