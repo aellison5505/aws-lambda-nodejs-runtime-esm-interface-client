@@ -1,0 +1,73 @@
+time="2023-06-04T23:28:17.323" level=info msg="exec '../../../../node_modules/.bin/aws-lambda-ric-esm' (cwd=/usr/src/task/test/integration/test-handlers/echo, handler=index.handler)"
+time="2023-06-04T23:28:27.339" level=info msg="extensionsDisabledByLayer(/opt/disable-extensions-jwigqn8j) -> stat /opt/disable-extensions-jwigqn8j: no such file or directory"
+time="2023-06-04T23:28:27.339" level=warning msg="Cannot list external agents" error="open /opt/extensions: no such file or directory"
+START RequestId: 77dbe00a-0408-4b6f-a60c-5e3c572fcc60 Version: $LATEST
+2023-06-04T23:28:27.455Z	undefined	INFO	Executing 'index.handler' in function directory '/usr/src/task/test/integration/test-handlers/echo'
+2023-06-04T23:28:27.467Z	undefined	ERROR	Unhandled Promise Rejection 	{"errorType":"Runtime.UnhandledPromiseRejection","errorMessage":"Error: MODULE_NOT_FOUND","reason":"Error: MODULE_NOT_FOUND","promise":{},"stack":["Runtime.UnhandledPromiseRejection: Error: MODULE_NOT_FOUND","    at process.<anonymous> (file:///usr/src/task/lib/index.js:37:23)","    at process.emit (node:events:513:28)","    at emit (node:internal/process/promises:149:20)","    at processPromiseRejections (node:internal/process/promises:283:27)","    at process.processTicksAndRejections (node:internal/process/task_queues:96:32)"]}
+time="2023-06-04T23:28:27.477" level=panic msg="ReplyStream not available"
+2023/06/04 23:28:27 http: panic serving 127.0.0.1:43442: &{0xc0000f4000 map[] 2023-06-04 23:28:27.477138536 +0000 UTC m=+10.154601301 panic <nil> ReplyStream not available <nil> <nil> }
+goroutine 42 [running]:
+net/http.(*conn).serve.func1(0xc0001235e0)
+	/usr/local/go/src/net/http/server.go:1800 +0x139
+panic(0x866640, 0xc0000f41c0)
+	/usr/local/go/src/runtime/panic.go:975 +0x3e3
+github.com/sirupsen/logrus.Entry.log(0xc0000f4000, 0xc000098f00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/entry.go:259 +0x335
+github.com/sirupsen/logrus.(*Entry).Log(0xc0000f40e0, 0xc000000000, 0xc000093588, 0x1, 0x1)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/entry.go:287 +0xeb
+github.com/sirupsen/logrus.(*Logger).Log(0xc0000f4000, 0xc000000000, 0xc000093588, 0x1, 0x1)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/logger.go:193 +0x7d
+github.com/sirupsen/logrus.(*Logger).Panic(...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/logger.go:234
+github.com/sirupsen/logrus.Panic(...)
+	/go/pkg/mod/github.com/sirupsen/logrus@v1.6.0/exported.go:129
+go.amzn.com/lambda/rapi/rendering.RenderInteropError(0x9097c0, 0xc00019e0e0, 0xc0001b4100, 0x902b60, 0xc000097040)
+	/LambdaRuntimeLocal/lambda/rapi/rendering/rendering.go:292 +0x9a
+go.amzn.com/lambda/rapi/handler.(*initErrorHandler).ServeHTTP(0xc0001180a0, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/LambdaRuntimeLocal/lambda/rapi/handler/initerror.go:52 +0x519
+net/http.HandlerFunc.ServeHTTP(0xc000108380, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).routeHTTP(0xc000104180, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:431 +0x278
+net/http.HandlerFunc.ServeHTTP(0xc000118030, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.RuntimeReleaseMiddleware.func1.1(0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:100 +0xea
+net/http.HandlerFunc.ServeHTTP(0xc000108180, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.AccessLogMiddleware.func1.1(0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:77 +0x170
+net/http.HandlerFunc.ServeHTTP(0xc0001081a0, 0x9097c0, 0xc00019e0e0, 0xc0001b4100)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+go.amzn.com/lambda/rapi/middleware.AppCtxMiddleware.func1.1(0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/LambdaRuntimeLocal/lambda/rapi/middleware/middleware.go:66 +0x77
+net/http.HandlerFunc.ServeHTTP(0xc0001162d0, 0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).ServeHTTP(0xc000104180, 0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:70 +0x513
+github.com/go-chi/chi.(*Mux).Mount.func1(0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:298 +0x118
+net/http.HandlerFunc.ServeHTTP(0xc0001083e0, 0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).routeHTTP(0xc000104120, 0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:431 +0x278
+net/http.HandlerFunc.ServeHTTP(0xc0001180c0, 0x9097c0, 0xc00019e0e0, 0xc0001b4000)
+	/usr/local/go/src/net/http/server.go:2041 +0x44
+github.com/go-chi/chi.(*Mux).ServeHTTP(0xc000104120, 0x9097c0, 0xc00019e0e0, 0xc00013a300)
+	/go/pkg/mod/github.com/go-chi/chi@v4.1.2+incompatible/mux.go:86 +0x2b2
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x9097c0, 0xc00019e0e0, 0xc00013a300)
+	/usr/local/go/src/net/http/server.go:2836 +0xa3
+net/http.(*conn).serve(0xc0001235e0, 0x90a800, 0xc00011dfc0)
+	/usr/local/go/src/net/http/server.go:1924 +0x86c
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:2962 +0x35c
+2023-06-04T23:28:27.478Z	undefined	ERROR	Uncaught Exception 	{"errorType":"Error","errorMessage":"socket hang up","code":"ECONNRESET","stack":["Error: socket hang up","    at connResetException (node:internal/errors:711:14)","    at Socket.socketOnEnd (node:_http_client:518:23)","    at Socket.emit (node:events:525:35)","    at endReadableNT (node:internal/streams/readable:1359:12)","    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)"]}
+time="2023-06-04T23:28:27.487" level=warning msg="First fatal error stored in appctx: Runtime.ExitError"
+time="2023-06-04T23:28:27.487" level=warning msg="Process 27(aws-lambda-ric-esm) exited: Runtime exited without providing a reason"
+time="2023-06-04T23:28:27.487" level=error msg="Init failed" InvokeID= error="Runtime exited without providing a reason"
+time="2023-06-04T23:28:27.487" level=warning msg="Failed to send default error response: ErrInvalidInvokeID"
+time="2023-06-04T23:28:27.488" level=error msg="INIT DONE failed: Runtime.ExitError"
+time="2023-06-04T23:28:27.488" level=warning msg="Reset initiated: ReserveFail"
+time="2023-06-04T23:28:31.399" level=info msg="Received signal" signal=interrupt
+time="2023-06-04T23:28:31.399" level=info msg="Shutting down..."
+time="2023-06-04T23:28:31.4" level=warning msg="Reset initiated: SandboxTerminated"

@@ -4,6 +4,7 @@
   "description": "Sample Lambda echo handler for NodeJS",
   "main": "app.js",
   "author": "AWS Lambda",
+  "type": "module",
   "license": "Apache-2.0",
   "dependencies": {
     "aws-lambda-ric": "file:deps/aws-lambda-ric"

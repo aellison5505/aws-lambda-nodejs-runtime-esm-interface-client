@@ -31,6 +31,7 @@
     "test:unit": "ts-mocha --experimental-specifier-resolution=node --loader=ts-node/esm test/unit/**/*.test.ts -p ./test/tsconfig.json",
     "test:unit:watch": "ts-mocha test/unit/**/*.test.ts --reporter ./test/utils/StdoutReporter --watch-extensions ts --watch --watch-files src, test/unit/**/*.ts -p ./test/unit/tsconfig.json",
     "test:coverage": "nyc npm run test:unit",
+    "test:int": "test/integration/rieRun_dev.sh & test/integration/rieRun_curl.sh",
     "tsc": "tsc -b src",
     "tsc:watch": "tsc -b src --watch",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",

@@ -4,5 +4,8 @@
     { "path": "../src" }
   ],
   "compilerOptions": {
-  }
+  },
+  "exclude": [
+    "integration"
+  ]
 }
