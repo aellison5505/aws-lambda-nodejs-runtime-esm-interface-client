@@ -29,7 +29,7 @@ describe("building error requests with the RuntimeClient", () => {
     [new runtimeErrors.HandlerNotFound(), "Runtime.HandlerNotFound"],
     [new runtimeErrors.MalformedHandlerName(), "Runtime.MalformedHandlerName"],
     [new runtimeErrors.UserCodeSyntaxError(), "Runtime.UserCodeSyntaxError"],
-    [({ data: "some random object" } as unknown) as Error, "object"],
+    [{ data: "some random object" } as unknown as Error, "object"],
     [new EvilError(), "handled"],
   ];
 

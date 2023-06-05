@@ -32,7 +32,9 @@ export class StdoutReporter extends reporters.Base {
     const stats = runner.stats;
 
     runner
-      .once(EVENT_RUN_BEGIN, () => { return })
+      .once(EVENT_RUN_BEGIN, () => {
+        return;
+      })
       .on(EVENT_SUITE_BEGIN, (suite) => {
         this.log(suite.title);
         this.increaseIndent();
@@ -52,7 +54,7 @@ export class StdoutReporter extends reporters.Base {
       .once(EVENT_RUN_END, () => {
         this.log(
           "Results " +
-            (stats.passes).toString() +
+            stats.passes.toString() +
             " passed out of " +
             (stats.passes + stats.failures).toString() +
             " total tests"
@@ -87,4 +89,4 @@ export class StdoutReporter extends reporters.Base {
       this._alreadyWritten = true;
     }
   }
-};
+}

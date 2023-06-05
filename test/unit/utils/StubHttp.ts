@@ -25,6 +25,6 @@ export class StubHttp {
 
   request(options: RequestOptions | string | URL): ClientRequest {
     this.lastUsedOptions = options;
-    return (noOpRequest as unknown) as ClientRequest;
+    return noOpRequest as unknown as ClientRequest;
   }
 }

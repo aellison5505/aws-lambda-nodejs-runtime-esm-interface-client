@@ -27,7 +27,7 @@
     {
       "files":["test/**/*.ts"],
       "rules": {
-        "no-console": "off",
+        "no-console": "error",
         "@typescript-eslint/no-explicit-any": "off",
         "no-prototype-builtins": "off",
         "strictBindCallApply": "off"
